@@ -1,0 +1,130 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html, body {
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+}
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background: #1a1a1a;
+    position: relative;
+}
+
+#canvas-container {
+    width: 100vw;
+    height: 100vh;
+    background: #1a1a1a;
+    position: fixed;
+    top: 0;
+    left: 0;
+}
+
+.animation-controls {
+    position: fixed;
+    bottom: 30px;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 1000;
+    text-align: center;
+}
+
+#playAnimationBtn {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+    border: none;
+    padding: 15px 40px;
+    font-size: 1.1em;
+    border-radius: 30px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 20px rgba(102, 126, 234, 0.5);
+    font-weight: 600;
+    opacity: 0.5;
+    cursor: not-allowed;
+}
+
+#playAnimationBtn:not(:disabled):hover {
+    transform: translateY(-3px);
+    box-shadow: 0 6px 25px rgba(102, 126, 234, 0.7);
+}
+
+#playAnimationBtn:not(:disabled):active {
+    transform: translateY(-1px);
+}
+
+#playAnimationBtn.playing {
+    background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+    box-shadow: 0 4px 20px rgba(245, 87, 108, 0.5);
+}
+
+#playAnimationBtn:not(:disabled).playing:hover {
+    box-shadow: 0 6px 25px rgba(245, 87, 108, 0.7);
+}
+
+.loader {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(26, 26, 26, 0.95);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 2000;
+}
+
+.loader-content {
+    text-align: center;
+    color: white;
+}
+
+.spinner {
+    border: 4px solid rgba(255, 255, 255, 0.3);
+    border-top: 4px solid #667eea;
+    border-radius: 50%;
+    width: 50px;
+    height: 50px;
+    animation: spin 1s linear infinite;
+    margin: 0 auto 20px;
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+.loader-content p {
+    font-size: 1.2em;
+    color: #ffffff;
+    margin-top: 10px;
+}
+
+@media (max-width: 768px) {
+    #playAnimationBtn {
+        padding: 12px 30px;
+        font-size: 1em;
+    }
+    
+    .animation-controls {
+        bottom: 20px;
+    }
+    
+    .spinner {
+        width: 40px;
+        height: 40px;
+    }
+    
+    .loader-content p {
+        font-size: 1em;
+    }
+}
+

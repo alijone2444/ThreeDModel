@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>3D Bamboo House Viewer</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <div id="canvas-container"></div>
+    <div id="loader" class="loader">
+        <div class="loader-content">
+            <div class="spinner"></div>
+            <p>Loading 3D Model...</p>
+        </div>
+    </div>
+    <div class="animation-controls">
+        <button id="playAnimationBtn" onclick="startRotationAndAnimation()" disabled>▶️ Play Animation</button>
+    </div>
+
+    <!-- Simple lighting / HDR controls -->
+    <div class="lighting-controls"
+        style="position: fixed; top: 10px; right: 10px; padding: 10px; background: rgba(0,0,0,0.5); color: #fff; font-family: sans-serif; font-size: 12px; border-radius: 6px; z-index: 10;">
+        <div style="margin-bottom: 6px; font-weight: bold;">Environment & Lights</div>
+        <label style="display:block; margin-bottom:4px;">
+            HDR Intensity
+            <input id="hdrIntensitySlider" type="range" min="0.5" max="2.0" step="0.01" value="1.2">
+            <span id="hdrIntensityValue">1.2</span>
+        </label>
+        <label style="display:block; margin-bottom:4px;">
+            Sun Light
+            <input id="sunIntensitySlider" type="range" min="0" max="4" step="0.01" value="2.5">
+            <span id="sunIntensityValue">2.5</span>
+        </label>
+        <label style="display:block; margin-bottom:4px;">
+            Ambient Light
+            <input id="ambientIntensitySlider" type="range" min="0" max="1" step="0.01" value="0.15">
+            <span id="ambientIntensityValue">0.15</span>
+        </label>
+        <label style="display:block;">
+            Reflections
+            <input id="reflectionIntensitySlider" type="range" min="0" max="2.5" step="0.01" value="1.0">
+            <span id="reflectionIntensityValue">1.0</span>
+        </label>
+    </div>
+
+    <!-- Three.js Core -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <!-- DRACOLoader for Draco-compressed models (MUST be loaded before GLTFLoader) -->
+    <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/loaders/DRACOLoader.js"></script>
+    <!-- GLTFLoader -->
+    <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/loaders/GLTFLoader.js"></script>
+    <!-- RGBELoader for HDR images -->
+    <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/loaders/RGBELoader.js"></script>
+    <!-- OrbitControls -->
+    <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/controls/OrbitControls.js"></script>
+    <!-- Main Script -->
+    <script src="script.js"></script>
+
+</body>
+
+</html>
