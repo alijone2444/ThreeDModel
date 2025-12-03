@@ -174,7 +174,13 @@ rgbeLoader.load(
         console.log('HDR background loaded successfully!');
     },
     function (xhr) {
-        console.log('HDR loading progress:', (xhr.loaded / xhr.total * 100) + '%');
+        // Some servers/CDNs don't provide total size, which makes xhr.total === 0
+        if (xhr.total > 0) {
+            const percent = (xhr.loaded / xhr.total) * 100;
+            console.log('HDR loading progress:', Math.round(percent) + '%');
+        } else {
+            console.log('HDR loading progress: loading... (total size unknown)');
+        }
     },
     function (error) {
         console.error('Error loading HDR background:', error);
@@ -673,16 +679,21 @@ loader.load(
         }
     },
     function (xhr) {
-        const percentLoaded = (xhr.loaded / xhr.total * 100);
-        console.log(percentLoaded + '% loaded');
+        // Avoid dividing by zero when total size is not known (common in production/CDN)
+        if (xhr.total > 0) {
+            const percentLoaded = (xhr.loaded / xhr.total * 100);
+            console.log(Math.round(percentLoaded) + '% loaded');
 
-        // Update loader progress if needed
-        const loader = document.getElementById('loader');
-        if (loader) {
-            const loaderText = loader.querySelector('p');
-            if (loaderText) {
-                loaderText.textContent = `Loading 3D Model... ${Math.round(percentLoaded)}%`;
+            // Update loader progress if needed
+            const loader = document.getElementById('loader');
+            if (loader) {
+                const loaderText = loader.querySelector('p');
+                if (loaderText) {
+                    loaderText.textContent = `Loading 3D Model... ${Math.round(percentLoaded)}%`;
+                }
             }
+        } else {
+            console.log('Model loading... (total size unknown)');
         }
     },
     function (error) {
